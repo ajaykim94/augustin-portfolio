@@ -9,10 +9,10 @@ import { Github, FileText, ExternalLink, Mail, Linkedin, BarChart3, Layers, Spar
 const PROFILE = {
   name: "Augustin Kim",
   title: "Data Scientist",
-  blurb: "I build end‑to‑end ML systems that turn messy data into measurable impact — from churn and RFM to MVP prediction.",
+  blurb: "I build end‑to‑end ML systems that turn messy data into measurable impact, from churn and RFM to MVP prediction.",
   email: "mailto:augustin@example.com",
   linkedin: "https://www.linkedin.com/in/",
-  github: "https://github.com/",
+  github: "https://github.com/ajaykim94",
   location: "Los Angeles, CA",
 };
 
