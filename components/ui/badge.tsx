@@ -1,11 +1,7 @@
 
 import * as React from "react";
 import clsx from "./clsx";
-
-type Props = React.HTMLAttributes<HTMLSpanElement> & {
-  variant?: "default" | "secondary" | "outline";
-};
-
+type Props = React.HTMLAttributes<HTMLSpanElement> & { variant?: "default" | "secondary" | "outline" };
 export function Badge({ className, variant="default", ...props }: Props) {
   const variants = {
     default: "bg-neutral-900 text-white",

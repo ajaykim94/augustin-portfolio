@@ -9,7 +9,7 @@ import { Github, FileText, ExternalLink, Mail, Linkedin, BarChart3, Layers, Spar
 const PROFILE = {
   name: "Augustin Kim",
   title: "Data Scientist",
-  blurb: "I build end‑to‑end ML systems that turn messy data into measurable impact — from churn and RFM to MVP prediction.",
+  blurb: "I build end-to-end ML systems that turn messy data into measurable impact — from churn and RFM to MVP prediction.",
   email: "mailto:augustin@example.com",
   linkedin: "https://www.linkedin.com/in/",
   github: "https://github.com/",
@@ -18,16 +18,34 @@ const PROFILE = {
 
 const PROJECTS = [
   {
+    id: "calfires",
+    title: "California Wildfires — Interactive Visualization",
+    org: "Personal / UC Berkeley",
+    timeframe: "2024–2025",
+    summary: "Interactive geospatial exploration of California wildfires with filters for year, size, and cause; highlights trends and risk hot spots.",
+    impact: [
+      "Unified historical fires and weather features; fast map filtering and drill-down",
+      "Clear story for risk awareness and resource planning; public demo linked",
+    ],
+    stack: ["JavaScript", "D3", "Mapbox/Leaflet", "Netlify"],
+    tags: ["Geospatial", "Visualization", "Wildfires"],
+    links: {
+      report: "#",
+      notebook: "#",
+      demo: "https://calfires.netlify.app/",
+    },
+  },
+  {
     id: "bookbinders",
     title: "Catalog Targeting with Logistic Regression",
     org: "BookBinders",
     timeframe: "Academic project",
-    summary: "Built a purchase‑propensity model, then translated it to deciles, lift/gains, and breakeven targeting to drive positive ROI on mailings.",
+    summary: "Built a purchase-propensity model, then translated it to deciles, lift/gains, and breakeven targeting to drive positive ROI on mailings.",
     impact: [
-      "Identified high‑lift segments; recommended mailing threshold at breakeven ≥ 8.3% RR",
+      "Identified high-lift segments; recommended mailing threshold at breakeven ≥ 8.3% RR",
       "Projected gross profit +$122k and ROMI ~156% on targeted campaign",
     ],
-    stack: ["Python", "pandas", "scikit‑learn", "Matplotlib"],
+    stack: ["Python", "pandas", "scikit-learn", "Matplotlib"],
     tags: ["Logistic Regression", "Lift & Gains", "Marketing Analytics"],
     links: {
       report: "/reports/Book_Binders_Report.pdf",
@@ -39,12 +57,12 @@ const PROJECTS = [
     title: "Telecom Churn Prediction & Retention Strategy",
     org: "Cell2Cell",
     timeframe: "Academic project",
-    summary: "Developed a churn model (logistic) and retention playbook with device‑upgrade and plan incentives targeting at‑risk cohorts.",
+    summary: "Developed a churn model (logistic) and retention playbook with device-upgrade and plan incentives targeting at-risk cohorts.",
     impact: [
       "Validation lift ≈ 174 vs. average churn",
       "Prioritized actions: device refresh at 12–13 months, service credit after repeated drops",
     ],
-    stack: ["Python", "pandas", "scikit‑learn"],
+    stack: ["Python", "pandas", "scikit-learn"],
     tags: ["Churn", "Classification", "Uplift Strategy"],
     links: {
       report: "/reports/Cell2Cell_Report.pdf",
@@ -55,13 +73,13 @@ const PROJECTS = [
     id: "nba-mvp",
     title: "Who Wins MVP? Predictive Modeling on NBA Data",
     org: "INDENG 142",
-    timeframe: "Capstone‑style class project",
-    summary: "Scraped Basketball‑Reference, engineered features, and compared Logistic Regression, MLP, Decision Trees, and Random Forests for MVP prediction.",
+    timeframe: "Capstone-style class project",
+    summary: "Scraped Basketball-Reference, engineered features, and compared Logistic Regression, MLP, Decision Trees, and Random Forests for MVP prediction.",
     impact: [
       "Random Forest ranked 2021 MVP race ~90% ranking accuracy",
-      "Built interpretable feature pipeline & cross‑validation for model selection",
+      "Built interpretable feature pipeline & cross-validation for model selection",
     ],
-    stack: ["Python", "pandas", "scikit‑learn", "MLP"],
+    stack: ["Python", "pandas", "scikit-learn", "MLP"],
     tags: ["Sports Analytics", "Classification", "Feature Engineering"],
     links: {
       report: "/reports/NBA_Predictions_Project_Report.pdf",
@@ -73,10 +91,10 @@ const PROJECTS = [
     title: "RFM Segmentation & Profitability",
     org: "Tuscan",
     timeframe: "Course project",
-    summary: "Segmented 1.9M customers via RFM (sequential n‑tiles), computed response by cell, and optimized mailing profitability.",
+    summary: "Segmented 1.9M customers via RFM (sequential n-tiles), computed response by cell, and optimized mailing profitability.",
     impact: [
       "Mailing only profitable cells: ROMI ~75% and gross profit ↑",
-      "Breakeven response ≈ 1.92%; clear decile‑based targeting guidance",
+      "Breakeven response ≈ 1.92%; clear decile-based targeting guidance",
     ],
     stack: ["Python", "pandas"],
     tags: ["RFM", "Segmentation", "Direct Marketing"],
@@ -90,7 +108,7 @@ const PROJECTS = [
     title: "Personal Finance ETL (Quicken/QuickBooks)",
     org: "Independent",
     timeframe: "Personal project",
-    summary: "Exploratory ETL/EDA of finance data; category normalization and time‑series summaries to surface recurring charges and budget drift.",
+    summary: "Exploratory ETL/EDA of finance data; category normalization and time-series summaries to surface recurring charges and budget drift.",
     impact: [
       "Normalized categories and merchant aliases for consistent analytics",
       "Monthly aggregation surface: burn rate, inflows/outflows, and trend alerts",
@@ -171,11 +189,14 @@ export default function Page() {
                   {p.stack.map((s) => <Badge key={s} className="rounded-full" variant="outline">{s}</Badge>)}
                 </div>
                 <div className="mt-5 flex flex-wrap gap-3">
-                  {p.links.report !== "#" && (
+                  {p.links.report && p.links.report !== "#" && (
                     <Button size="sm" variant="secondary" asChild href={p.links.report}><><FileText className="mr-2 h-4 w-4" /> Report</></Button>
                   )}
-                  {p.links.notebook && (
+                  {p.links.notebook && p.links.notebook !== "#" && (
                     <Button size="sm" variant="outline" asChild href={p.links.notebook}><><Github className="mr-2 h-4 w-4" /> Notebook / Code</></Button>
+                  )}
+                  {p.links.demo && (
+                    <Button size="sm" asChild href={p.links.demo}><><ExternalLink className="mr-2 h-4 w-4" /> Live Demo</></Button>
                   )}
                 </div>
               </CardContent>
@@ -205,13 +226,15 @@ export default function Page() {
                   {p.impact.map((i, idx) => <li key={idx}>{i}</li>)}
                 </ul>
                 <div className="mt-5 flex flex-wrap gap-3">
-                  {p.links.report !== "#" && (
+                  {p.links.report && p.links.report !== "#" && (
                     <Button asChild href={p.links.report}><><FileText className="mr-2 h-4 w-4" /> View Report</></Button>
                   )}
-                  {p.links.notebook && (
-                    <Button variant="secondary" asChild href={p.links.notebook}><><Github className="mr-2 h-4 w-4" /> View Notebook</></Button>
+                  {p.links.notebook && p.links.notebook !== "#" && (
+                    <Button variant="secondary" asChild href={p.links.notebook}><><Github className="mr-2 h-4 w-4" /> View Notebook</Button>
                   )}
-                  <Button variant="outline" asChild href="#"><><ExternalLink className="mr-2 h-4 w-4" /> Live Demo</></Button>
+                  {p.links.demo && (
+                    <Button variant="outline" asChild href={p.links.demo}><><ExternalLink className="mr-2 h-4 w-4" /> Live Demo</></Button>
+                  )}
                 </div>
               </div>
             ))}

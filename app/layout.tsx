@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Augustin Kim — Data Science Portfolio",
-  description: "Projects in marketing analytics, churn, RFM, and sports analytics",
+  description: "Projects in marketing analytics, churn, RFM, sports analytics, and geospatial visualization",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

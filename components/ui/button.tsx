@@ -17,14 +17,11 @@ export function Button({ variant="default", size="md", asChild=false, href, clas
     secondary: "bg-neutral-100 text-neutral-900 hover:bg-neutral-200 focus:ring-neutral-300",
     outline: "border border-neutral-300 text-neutral-900 hover:bg-neutral-50 focus:ring-neutral-300",
   };
-  const sizes = {
-    sm: "text-sm px-3 py-1.5",
-    md: "text-sm px-4 py-2",
-  };
-
+  const sizes = { sm: "text-sm px-3 py-1.5", md: "text-sm px-4 py-2" };
   const cls = clsx(base, variants[variant], sizes[size], className);
   if (asChild && href) {
-    return <a className={cls} href={href} target={href.startsWith('http') ? "_blank" : undefined} rel="noreferrer">{children}</a>;
+    const external = href.startsWith("http");
+    return <a className={cls} href={href} target={external ? "_blank" : undefined} rel={external ? "noreferrer" : undefined}>{children}</a>;
   }
   return <button className={cls} {...props}>{children}</button>;
 }
