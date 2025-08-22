@@ -14,7 +14,7 @@ const PROFILE = {
 =======
   blurb: "I build end‑to‑end ML systems that turn messy data into measurable impact, from churn and RFM to MVP prediction.",
 >>>>>>> 53941a780b9d6d4cc6d314ef3f4a388f34b3f386
-  email: "mailto:augustin@example.com",
+  email: "mailto:augustinjkim@gmail.com",
   linkedin: "https://www.linkedin.com/in/",
   github: "https://github.com/ajaykim94",
   location: "Los Angeles, CA",
@@ -248,3 +248,4 @@ export default function Page() {
     </div>
   );
 }
+
