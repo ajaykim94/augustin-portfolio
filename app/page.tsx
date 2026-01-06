@@ -1,350 +1,165 @@
-"use client";
-import React, { useMemo, useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import {
-  Github,
-  FileText,
-  ExternalLink,
-  Mail,
-  Linkedin,
-  BarChart3,
-  Layers,
-  Sparkles,
-  ChevronRight,
-} from "lucide-react";
+import Image from "next/image";
 
-const PROFILE = {
-  name: "Augustin Kim",
-  title: "Data Scientist",
-  blurb:
-    "I build end-to-end ML systems that turn messy data into measurable impact — from churn and RFM to MVP prediction.",
-  email: "mailto:augustin@example.com",
-  linkedin: "https://www.linkedin.com/in/",
-  github: "https://github.com/",
-  location: "Los Angeles, CA",
-};
-
-type Links = {
-  report?: string;
-  notebook?: string;
-  live?: string;
-};
-
-type Project = {
-  id: string;
-  title: string;
-  org: string;
-  timeframe: string;
-  summary: string;
-  impact: string[];
-  stack: string[];
-  tags: string[];
-  links: Links;
-};
-
-const PROJECTS: Project[] = [
+const PROJECTS = [
   {
-    id: "calfires",
-    title: "California Wildfires — Interactive Visualization",
-    org: "Personal",
-    timeframe: "Ongoing",
-    summary:
-      "Interactive web app exploring California wildfires using geospatial data and lightweight client-side rendering.",
-    impact: [
-      "Highlights spatiotemporal patterns and incident clustering",
-      "Built for fast, lightweight exploration on the web",
+    title: "ForSEAble Kelp",
+    description:
+      "UC Berkeley MIDS capstone project modernizing kelp canopy monitoring using Sentinel-2 imagery and DeepLabV3+ semantic segmentation. Delivered an interactive web platform and AI assistant.",
+    tags: ["Computer Vision", "Remote Sensing", "Deep Learning", "AWS"],
+    links: [
+      { label: "Live Site", href: "https://forseable-kelp.com/" },
+      {
+        label: "UC Berkeley Project Page",
+        href: "https://www.ischool.berkeley.edu/projects/2025/forseable-kelp",
+      },
     ],
-    stack: ["JavaScript", "D3", "Netlify"],
-    tags: ["Geospatial", "Visualization", "Wildfires"],
-    links: { live: "https://calfires.netlify.app/" },
   },
   {
-    id: "bookbinders",
-    title: "Catalog Targeting with Logistic Regression",
-    org: "BookBinders",
-    timeframe: "Academic project",
-    summary:
-      "Built a purchase-propensity model, then translated it to deciles, lift/gains, and breakeven targeting to drive positive ROI on mailings.",
-    impact: [
-      "Identified high-lift segments; recommended mailing threshold at breakeven ≥ 8.3% RR",
-      "Projected gross profit +$122k and ROMI ~156% on targeted campaign",
-    ],
-    stack: ["Python", "pandas", "scikit-learn", "Matplotlib"],
-    tags: ["Logistic Regression", "Lift & Gains", "Marketing Analytics"],
-    links: {
-      report: "/reports/Book_Binders_Report.pdf",
-      notebook: "/reports/Book_Binders_Logistic_Regression.ipynb",
-    },
+    title: "CalFires: Wildfire Risk Modeling",
+    description:
+      "Machine learning models (Random Forest, XGBoost, Neural Networks) to predict wildfire risk in California using historical weather and fire data.",
+    tags: ["Machine Learning", "XGBoost", "Time Series"],
+    links: [],
   },
   {
-    id: "cell2cell",
-    title: "Telecom Churn Prediction & Retention Strategy",
-    org: "Cell2Cell",
-    timeframe: "Academic project",
-    summary:
-      "Developed a churn model (logistic) and retention playbook with device-upgrade and plan incentives targeting at-risk cohorts.",
-    impact: [
-      "Validation lift ≈ 174 vs. average churn",
-      "Prioritized actions: device refresh at 12–13 months, service credit after repeated drops",
+    title: "NBA Game Outcome Predictions",
+    description:
+      "Predictive modeling project analyzing NBA game data to forecast outcomes and performance trends.",
+    tags: ["Regression", "Classification", "Sports Analytics"],
+    links: [
+      {
+        label: "Report (PDF)",
+        href: "/reports/NBA_Predictions_Project_Report.pdf",
+      },
     ],
-    stack: ["Python", "pandas", "scikit-learn"],
-    tags: ["Churn", "Classification", "Uplift Strategy"],
-    links: {
-      report: "/reports/Cell2Cell_Report.pdf",
-      notebook: "/reports/Cell2Churn.ipynb",
-    },
   },
   {
-    id: "nba-mvp",
-    title: "Who Wins MVP? Predictive Modeling on NBA Data",
-    org: "INDENG 142",
-    timeframe: "Capstone-style class project",
-    summary:
-      "Scraped Basketball-Reference, engineered features, and compared Logistic Regression, MLP, Decision Trees, and Random Forests for MVP prediction.",
-    impact: [
-      "Random Forest ranked 2021 MVP race ~90% ranking accuracy",
-      "Built interpretable feature pipeline & cross-validation for model selection",
+    title: "Tuscan RFM Customer Segmentation",
+    description:
+      "Customer segmentation analysis using RFM metrics to identify high-value customers and behavioral patterns.",
+    tags: ["Customer Analytics", "Clustering", "RFM"],
+    links: [
+      {
+        label: "Report (PDF)",
+        href: "/reports/Tuscan_RFM_Report.pdf",
+      },
     ],
-    stack: ["Python", "pandas", "scikit-learn", "MLP"],
-    tags: ["Sports Analytics", "Classification", "Feature Engineering"],
-    links: {
-      report: "/reports/NBA_Predictions_Project_Report.pdf",
-      notebook: "/reports/NBA_Predictions.ipynb",
-    },
   },
   {
-    id: "tuscan-rfm",
-    title: "RFM Segmentation & Profitability",
-    org: "Tuscan",
-    timeframe: "Course project",
-    summary:
-      "Segmented 1.9M customers via RFM (sequential n-tiles), computed response by cell, and optimized mailing profitability.",
-    impact: [
-      "Mailing only profitable cells: ROMI ~75% and gross profit ↑",
-      "Breakeven response ≈ 1.92%; clear decile-based targeting guidance",
+    title: "Book Binders Logistic Regression",
+    description:
+      "Logistic regression model to predict outcomes in a manufacturing context, including feature analysis and model evaluation.",
+    tags: ["Logistic Regression", "Model Evaluation"],
+    links: [
+      {
+        label: "Report (PDF)",
+        href: "/reports/Book_Binders_Report.pdf",
+      },
     ],
-    stack: ["Python", "pandas"],
-    tags: ["RFM", "Segmentation", "Direct Marketing"],
-    links: {
-      report: "/reports/Tuscan_RFM_Report.pdf",
-      notebook: "/reports/Tuscan_RFM.ipynb",
-    },
-  },
-  {
-    id: "quicken",
-    title: "Personal Finance ETL (Quicken/QuickBooks)",
-    org: "Independent",
-    timeframe: "Personal project",
-    summary:
-      "Exploratory ETL/EDA of finance data; category normalization and time-series summaries to surface recurring charges and budget drift.",
-    impact: [
-      "Normalized categories and merchant aliases for consistent analytics",
-      "Monthly aggregation surface: burn rate, inflows/outflows, and trend alerts",
-    ],
-    stack: ["Python", "pandas"],
-    tags: ["ETL", "Time Series", "Personal Finance"],
-    links: { notebook: "/reports/Quicken_Quickbooks_Project.ipynb" },
   },
 ];
 
-export default function Page() {
-  const [active, setActive] = useState<string | null>(null);
-  const featured = useMemo(() => PROJECTS.slice(0, 3), []);
-
+export default function Home() {
   return (
-    <div className="min-h-screen">
-      {/* Hero */}
-      <header className="relative overflow-hidden">
-        <div className="mx-auto max-w-6xl px-6 pt-16 pb-10">
-          <div className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm bg-white shadow-sm">
-            <Sparkles className="h-4 w-4" />
-            <span>Portfolio</span>
-          </div>
-          <h1 className="mt-4 text-4xl sm:text-5xl font-semibold tracking-tight">
-            {PROFILE.name}
+    <main className="max-w-5xl mx-auto px-6 py-16 space-y-20">
+
+      {/* HERO */}
+      <section className="flex flex-col md:flex-row items-center gap-10">
+        <Image
+          src="/augustin.jpg"
+          alt="Augustin Kim"
+          width={160}
+          height={160}
+          className="rounded-2xl shadow-md"
+          priority
+        />
+
+        <div>
+          <h1 className="text-4xl font-bold tracking-tight">
+            Augustin Kim
           </h1>
-          <p className="mt-2 text-lg text-neutral-600">
-            {PROFILE.title} · {PROFILE.location}
+          <p className="mt-3 text-lg text-neutral-400 max-w-xl">
+            Data Scientist • UC Berkeley MIDS • Former U.S. Army Signals Analyst
           </p>
-          <p className="mt-4 max-w-2xl text-neutral-700">{PROFILE.blurb}</p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Button asChild href={PROFILE.linkedin}>
-              <>
-                <Linkedin className="mr-2 h-4 w-4" /> LinkedIn
-              </>
-            </Button>
-            <Button variant="secondary" asChild href={PROFILE.github}>
-              <>
-                <Github className="mr-2 h-4 w-4" /> GitHub
-              </>
-            </Button>
-            <Button variant="outline" asChild href={PROFILE.email}>
-              <>
-                <Mail className="mr-2 h-4 w-4" /> Contact
-              </>
-            </Button>
-          </div>
-        </div>
-      </header>
 
-      {/* Highlights */}
-      <section className="mx-auto max-w-6xl px-6 pb-6">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {featured.map((p) => (
-            <Card
-              key={p.id}
-              className="hover:shadow-lg transition-shadow cursor-pointer"
-              onClick={() => setActive(p.id)}
+          <div className="flex gap-4 mt-6">
+            <a
+              href="/resume.pdf"
+              className="px-5 py-2 rounded-xl bg-white text-black text-sm font-medium"
             >
-              <CardContent className="p-6">
-                <div className="flex items-center gap-2 text-sm text-neutral-600">
-                  <BarChart3 className="h-4 w-4" />
-                  <span>{p.org}</span>
-                </div>
-                <h3 className="mt-2 text-xl font-semibold leading-tight">
-                  {p.title}
-                </h3>
-                <p className="mt-2 text-neutral-700 line-clamp-3">
-                  {p.summary}
-                </p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {p.tags.map((t) => (
-                    <Badge key={t} variant="secondary" className="rounded-full">
-                      {t}
-                    </Badge>
-                  ))}
-                </div>
-                <div className="mt-4 flex items-center text-sm text-neutral-600">
-                  <span className="mr-2">Explore</span>
-                  <ChevronRight className="h-4 w-4" />
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* All Projects */}
-      <section className="mx-auto max-w-6xl px-6 pb-16">
-        <h2 className="text-2xl font-semibold">Projects</h2>
-        <div className="mt-6 grid gap-6 md:grid-cols-2">
-          {PROJECTS.map((p) => (
-            <Card key={p.id}>
-              <CardContent className="p-6">
-                <div className="flex items-center gap-2 text-sm text-neutral-600">
-                  <Layers className="h-4 w-4" />
-                  <span>{p.org}</span>
-                  <span>•</span>
-                  <span>{p.timeframe}</span>
-                </div>
-                <h3 className="mt-2 text-xl font-semibold leading-tight">
-                  {p.title}
-                </h3>
-                <p className="mt-2 text-neutral-700">{p.summary}</p>
-                <ul className="mt-3 list-disc pl-5 text-neutral-800 space-y-1">
-                  {p.impact.map((i, idx) => (
-                    <li key={idx}>{i}</li>
-                  ))}
-                </ul>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {p.stack.map((s) => (
-                    <Badge key={s} className="rounded-full" variant="outline">
-                      {s}
-                    </Badge>
-                  ))}
-                </div>
-                <div className="mt-5 flex flex-wrap gap-3">
-                  {p.links.report && p.links.report !== "#" && (
-                    <Button size="sm" variant="secondary" asChild href={p.links.report}>
-                      <>
-                        <FileText className="mr-2 h-4 w-4" /> Report
-                      </>
-                    </Button>
-                  )}
-                  {p.links.notebook && p.links.notebook !== "#" && (
-                    <Button size="sm" variant="outline" asChild href={p.links.notebook}>
-                      <>
-                        <Github className="mr-2 h-4 w-4" /> Notebook / Code
-                      </>
-                    </Button>
-                  )}
-                  {p.links.live && (
-                    <Button size="sm" asChild href={p.links.live}>
-                      <>
-                        <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
-                      </>
-                    </Button>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t bg-white">
-        <div className="mx-auto max-w-6xl px-6 py-10 text-sm text-neutral-600">
-          <p>
-            © {new Date().getFullYear()} {PROFILE.name}. Built with Next.js &
-            Tailwind.
-          </p>
-        </div>
-      </footer>
-
-      {/* Modal */}
-      {active && (
-        <div
-          className="fixed inset-0 z-50 bg-black/50 p-4"
-          onClick={() => setActive(null)}
-        >
-          <div
-            className="mx-auto mt-10 max-w-2xl rounded-2xl bg-white p-6 shadow-xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {PROJECTS.filter((p) => p.id === active).map((p) => (
-              <div key={p.id}>
-                <div className="flex items-center gap-2 text-sm text-neutral-600">
-                  <BarChart3 className="h-4 w-4" />
-                  <span>{p.org}</span>
-                </div>
-                <h3 className="mt-1 text-2xl font-semibold">{p.title}</h3>
-                <p className="mt-2 text-neutral-700">{p.summary}</p>
-                <ul className="mt-3 list-disc pl-5 text-neutral-800 space-y-1">
-                  {p.impact.map((i, idx) => (
-                    <li key={idx}>{i}</li>
-                  ))}
-                </ul>
-                <div className="mt-5 flex flex-wrap gap-3">
-                  {p.links.report && p.links.report !== "#" && (
-                    <Button asChild href={p.links.report}>
-                      <>
-                        <FileText className="mr-2 h-4 w-4" /> View Report
-                      </>
-                    </Button>
-                  )}
-                  {p.links.notebook && p.links.notebook !== "#" && (
-                    <Button variant="secondary" asChild href={p.links.notebook}>
-                      <>
-                        <Github className="mr-2 h-4 w-4" /> View Notebook
-                      </>
-                    </Button>
-                  )}
-                  {p.links.live && (
-                    <Button variant="outline" asChild href={p.links.live}>
-                      <>
-                        <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
-                      </>
-                    </Button>
-                  )}
-                </div>
-              </div>
-            ))}
+              Resume
+            </a>
+            <a
+              href="https://github.com/ajaykim94"
+              target="_blank"
+              className="px-5 py-2 rounded-xl border border-neutral-700 text-sm"
+            >
+              GitHub
+            </a>
+            <a
+              href="mailto:your.email@example.com"
+              className="px-5 py-2 rounded-xl border border-neutral-700 text-sm"
+            >
+              Contact
+            </a>
           </div>
         </div>
-      )}
-    </div>
+      </section>
+
+      {/* PROJECTS */}
+      <section className="space-y-10">
+        <h2 className="text-2xl font-semibold">Projects</h2>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          {PROJECTS.map((p) => (
+            <div
+              key={p.title}
+              className="border border-neutral-800 rounded-2xl p-6 hover:border-neutral-600 transition"
+            >
+              <h3 className="text-lg font-semibold">{p.title}</h3>
+              <p className="mt-2 text-neutral-400">{p.description}</p>
+
+              <div className="flex flex-wrap gap-2 mt-4">
+                {p.tags.map((t) => (
+                  <span
+                    key={t}
+                    className="text-xs px-3 py-1 rounded-full border border-neutral-700 text-neutral-300"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex gap-4 mt-5 text-sm">
+                {p.links.map((l) => (
+                  <a
+                    key={l.label}
+                    href={l.href}
+                    target="_blank"
+                    className="underline text-neutral-200"
+                  >
+                    {l.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* SKILLS */}
+      <section className="space-y-6">
+        <h2 className="text-2xl font-semibold">Tech Stack</h2>
+        <p className="text-neutral-400 max-w-3xl">
+          Python, PyTorch, TensorFlow, SQL, AWS, SageMaker, Docker, Pandas,
+          NumPy, Scikit-Learn, XGBoost, NLP, Computer Vision, Geospatial Analytics
+        </p>
+      </section>
+
+      <footer className="pt-10 text-sm text-neutral-500">
+        © {new Date().getFullYear()} Augustin Kim
+      </footer>
+    </main>
   );
 }
+
