@@ -21,43 +21,8 @@ const PROJECTS = [
     tags: ["Machine Learning", "XGBoost", "Time Series"],
     links: [],
   },
-  {
-    title: "NBA Game Outcome Predictions",
-    description:
-      "Predictive modeling project analyzing NBA game data to forecast outcomes and performance trends.",
-    tags: ["Regression", "Classification", "Sports Analytics"],
-    links: [
-      {
-        label: "Report (PDF)",
-        href: "/reports/NBA_Predictions_Project_Report.pdf",
-      },
-    ],
-  },
-  {
-    title: "Tuscan RFM Customer Segmentation",
-    description:
-      "Customer segmentation analysis using RFM metrics to identify high-value customers and behavioral patterns.",
-    tags: ["Customer Analytics", "Clustering", "RFM"],
-    links: [
-      {
-        label: "Report (PDF)",
-        href: "/reports/Tuscan_RFM_Report.pdf",
-      },
-    ],
-  },
-  {
-    title: "Book Binders Logistic Regression",
-    description:
-      "Logistic regression model to predict outcomes in a manufacturing context, including feature analysis and model evaluation.",
-    tags: ["Logistic Regression", "Model Evaluation"],
-    links: [
-      {
-        label: "Report (PDF)",
-        href: "/reports/Book_Binders_Report.pdf",
-      },
-    ],
-  },
 ];
+
 
 export default function Home() {
   return (
