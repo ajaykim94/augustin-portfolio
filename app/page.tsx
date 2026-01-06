@@ -114,7 +114,15 @@ export default function Home() {
           {PROJECTS.map((p) => (
             <div
               key={p.title}
-              className="border border-neutral-800 rounded-2xl p-6 hover:border-neutral-600 transition"
+              className="
+                bg-white
+                border border-neutral-200
+                rounded-2xl
+                p-6
+                shadow-sm
+                hover:shadow-md
+                transition
+              "
             >
               <h3 className="text-lg font-semibold">{p.title}</h3>
               <p className="mt-2 text-neutral-400">{p.description}</p>
