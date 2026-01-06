@@ -1,6 +1,16 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html, body { height: 100%; }
+:root {
+  --bg: 245 245 245;
+  --card: 255 255 255;
+  --text: 23 23 23;
+  --muted: 115 115 115;
+  --border: 212 212 212;
+}
+
+body {
+  background-color: rgb(var(--bg));
+  color: rgb(var(--text));
+}
