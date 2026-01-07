@@ -15,13 +15,20 @@ const PROJECTS = [
     ],
   },
   {
-    title: "CalFires: Wildfire Risk Modeling",
+    title: "CalFires: Wildfire Risk Modeling & Analysis",
     description:
-      "Machine learning models (Random Forest, XGBoost, Neural Networks) to predict wildfire risk in California using historical weather and fire data.",
-    tags: ["Machine Learning", "XGBoost", "Time Series"],
-    links: [],
-  },
-];
+      "Interactive visual analytics and modeling of California wildfire incidents, seasonal patterns, and environmental factors.",
+    tags: ["Data Visualization", "Machine Learning", "Time Series", "D3/Observable"],
+    links: [
+      { label: "Live Site", href: "https://groups.ischool.berkeley.edu/calfire/" },
+      { label: "GitHub", href: "https://github.com/ajaykim94/Projects" } // optional, replace if you have a specific repo
+      ],
+  previews: [
+    "/projects/calfire/calfire-1.jpg",
+    "/projects/calfire/calfire-2.jpg",
+    "/projects/calfire/calfire-3.jpg",
+  ],
+},
 
 
 export default function Home() {
