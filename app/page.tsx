@@ -85,46 +85,56 @@ export default function Home() {
         <div className="grid md:grid-cols-2 gap-6">
           {PROJECTS.map((p) => (
             <div
-              key={p.title}
-              className="
-                bg-white
-                border border-neutral-200
-                rounded-2xl
-                p-6
-                shadow-sm
-                hover:shadow-md
-                transition
-              "
-            >
-              <h3 className="text-lg font-semibold">{p.title}</h3>
-              <p className="mt-2 text-neutral-400">{p.description}</p>
-
-              <div className="flex flex-wrap gap-2 mt-4">
-                {p.tags.map((t) => (
-                  <span
-                    key={t}
-                    className="text-xs px-3 py-1 rounded-full border border-neutral-700 text-neutral-300"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-
-              <div className="flex gap-4 mt-5 text-sm">
-                {p.links.map((l) => (
-                  <a
-                    key={l.label}
-                    href={l.href}
-                    target="_blank"
-                    className="underline text-neutral-200"
-                  >
-                    {l.label}
-                  </a>
-                ))}
-              </div>
-            </div>
-          ))}
+  key={p.title}
+  className="bg-white border border-neutral-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition"
+>
+  {/* PREVIEW IMAGES */}
+  {p.previews?.length && (
+    <div className="mb-4 grid grid-cols-3 gap-2">
+      {p.previews.map((src) => (
+        <div
+          key={src}
+          className="relative aspect-[4/3] overflow-hidden rounded-xl border border-neutral-200"
+        >
+          <Image
+            src={src}
+            alt={`${p.title} preview`}
+            fill
+            className="object-cover"
+          />
         </div>
+      ))}
+    </div>
+  )}
+
+  <h3 className="text-lg font-semibold">{p.title}</h3>
+  <p className="mt-2 text-neutral-600">{p.description}</p>
+
+  <div className="flex flex-wrap gap-2 mt-4">
+    {p.tags.map((t) => (
+      <span
+        key={t}
+        className="text-xs px-3 py-1 rounded-full border border-neutral-300 text-neutral-700"
+      >
+        {t}
+      </span>
+    ))}
+  </div>
+
+  <div className="flex gap-4 mt-5 text-sm">
+    {p.links.map((l) => (
+      <a
+        key={l.label}
+        href={l.href}
+        target="_blank"
+        className="underline text-neutral-800"
+      >
+        {l.label}
+      </a>
+    ))}
+  </div>
+</div>
+
       </section>
 
       {/* SKILLS */}
