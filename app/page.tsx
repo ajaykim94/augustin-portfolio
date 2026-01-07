@@ -1,5 +1,8 @@
 // app/page.tsx
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 
 type ProjectLink = { label: string; href: string };
 type Project = {
@@ -45,6 +48,8 @@ const PROJECTS: Project[] = [
 ];
 
 export default function Home() {
+  const [activeImage, setActiveImage] = useState<string | null>(null);
+
   return (
     <main className="min-h-screen bg-neutral-950 text-neutral-100">
       {/* subtle background for readability */}
@@ -109,13 +114,15 @@ export default function Home() {
                 key={p.title}
                 className="rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6 shadow-sm hover:bg-neutral-900/80 transition"
               >
-                {/* Preview images (optional per project) */}
+                {/* Preview images (click to zoom) */}
                 {p.previews?.length ? (
                   <div className="mb-4 grid grid-cols-3 gap-2">
                     {p.previews.slice(0, 3).map((src) => (
-                      <div
+                      <button
                         key={src}
-                        className="relative aspect-[4/3] overflow-hidden rounded-xl border border-neutral-800 bg-neutral-950"
+                        onClick={() => setActiveImage(src)}
+                        className="relative aspect-[4/3] overflow-hidden rounded-xl border border-neutral-800 bg-neutral-950 focus:outline-none hover:ring-2 hover:ring-white/40 transition"
+                        aria-label={`Open ${p.title} preview`}
                       >
                         <Image
                           src={src}
@@ -123,7 +130,7 @@ export default function Home() {
                           fill
                           className="object-cover"
                         />
-                      </div>
+                      </button>
                     ))}
                   </div>
                 ) : null}
@@ -173,8 +180,39 @@ export default function Home() {
           © {new Date().getFullYear()} Augustin Kim
         </footer>
       </div>
+
+      {/* LIGHTBOX MODAL */}
+      {activeImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+          onClick={() => setActiveImage(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div
+            className="relative mx-auto w-full max-w-6xl px-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setActiveImage(null)}
+              className="absolute -top-10 right-4 text-white text-sm opacity-80 hover:opacity-100"
+              aria-label="Close preview"
+            >
+              ✕ Close
+            </button>
+
+            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-black border border-neutral-800">
+              <Image
+                src={activeImage}
+                alt="Project preview"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
-
-
