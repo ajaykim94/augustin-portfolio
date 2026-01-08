@@ -45,6 +45,21 @@ const PROJECTS: Project[] = [
       "/projects/calfire/calfire-3.jpg",
     ],
   },
+  {
+  title: "Emotion Recognition in Online Communication",
+  description:
+    "Multi-class emotion classification on tweets (anger, love, fear, joy, sadness, surprise). Compared TF-IDF Naive Bayes baseline (82% acc) vs deep models: DAN (86% acc, macro F1 86%), CNN (91% acc, macro F1 88%), and BERT (93% acc, macro F1 93%). Built an ensemble that reached 95% accuracy.",
+  tags: ["NLP", "Sentiment Analysis", "BERT", "CNN", "DAN", "Ensembles"],
+  links: [
+    { label: "Report (PDF)", href: "/projects/Emotion Recognition/Emotion_Recognition_Final_Report.pdf" },
+  ],
+  // Optional previews (add screenshots later)
+  // previews: [
+  //   "/projects/emotion-recognition/emotion-1.jpg",
+  //   "/projects/emotion-recognition/emotion-2.jpg",
+  //   "/projects/emotion-recognition/emotion-3.jpg",
+  // ],
+},
 ];
 
 export default function Home() {
