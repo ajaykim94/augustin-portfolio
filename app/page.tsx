@@ -27,11 +27,11 @@ const PROJECTS: Project[] = [
       },
     ],
     // Optional: add preview screenshots later the same way as CalFires
-    // previews: [
-    //   "/projects/forseable-kelp/kelp-1.jpg",
-    //   "/projects/forseable-kelp/kelp-2.jpg",
-    //   "/projects/forseable-kelp/kelp-3.jpg",
-    // ],
+    previews: [
+    "/projects/forseable-kelp/kelp-1.jpg",
+    "/projects/forseable-kelp/kelp-2.jpg",
+    "/projects/forseable-kelp/kelp-3.jpg",
+    ],
   },
   {
     title: "CalFires: Wildfire Risk Modeling & Visualization",
