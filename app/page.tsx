@@ -54,11 +54,11 @@ const PROJECTS: Project[] = [
     { label: "Report (PDF)", href: "/projects/Emotion Recognition/Emotion_Recognition_Final_Report.pdf" },
   ],
   // Optional previews (add screenshots later)
-  // previews: [
-  //   "/projects/emotion-recognition/emotion-1.jpg",
+  previews: [
+    "/projects/emotion-recognition/emotion-1.jpg"
   //   "/projects/emotion-recognition/emotion-2.jpg",
   //   "/projects/emotion-recognition/emotion-3.jpg",
-  // ],
+  ],
 },
 ];
 
