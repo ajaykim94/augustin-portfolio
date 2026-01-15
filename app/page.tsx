@@ -60,6 +60,19 @@ const PROJECTS: Project[] = [
   //   "/projects/emotion-recognition/emotion-3.jpg",
   ],
 },
+{
+  title: "Customer Churn Prediction (Business ML)",
+  description:
+    "End-to-end churn prediction system using XGBoost (ROC-AUC 0.83, PR-AUC 0.64). Applied SHAP for interpretability and optimized decision thresholds via cost–benefit analysis to maximize retention ROI.",
+  tags: ["Machine Learning", "XGBoost", "SHAP", "Business Analytics"],
+  links: [
+    { label: "GitHub", href: "https://github.com/ajaykim94/business-churn-ml" },
+  ],
+  previews: [
+    "/projects/churn/churn-profit.jpg",
+    "/projects/churn/churn-shap.jpg",
+  ],
+},  
 ];
 
 export default function Home() {
